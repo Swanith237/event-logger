@@ -1,0 +1,30 @@
+{
+  "name": "event-logger",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "node ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Swanith237/event-logger.git"
+  },
+  "keywords": [
+    "discord",
+    "discord.js",
+    "events",
+    "logging"
+  ],
+  "author": "Swanith",
+  "license": "ISC",
+  "dependencies": {
+    "discord-api-types": "^0.37.50",
+    "discord.js": "^14.11.0",
+    "dotenv": "^16.3.1"
+  },
+  "bugs": {
+    "url": "https://github.com/Swanith237/event-logger/issues"
+  },
+  "homepage": "https://github.com/Swanith237/event-logger#readme",
+  "description": ""
+}
