@@ -9,7 +9,7 @@ module.exports = (client) => {
         for (const folder of eventFolders) {
             const eventFiles = fs.readdirSync(`./src/events/${folder}`).filter((file) => file.endsWith('.js'));
 
-            console.log(`\n => ${folder.split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ")} - Events`);
+            console.log(`\n => ${folder.split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ")}`);
             if (eventFiles.length < 1) {
                 console.log(c.fg.yellow + 'No Events Found' + c.reset);
             };
