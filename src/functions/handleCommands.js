@@ -1,18 +1,29 @@
+require('dotenv').config();
 const { REST } = require("@discordjs/rest");
 const { Routes } = require('discord-api-types/v9');
 const fs = require('fs');
-
-const clientID = '1065034535558983741'; 
-const guildID = '1135541650165334086'; 
+const c = require('../../colors');
 
 module.exports = (client) => {
     client.handleCommands = async (commandFolders, path) => {
-        for (folder of commandFolders) {
-            const commandFiles = fs.readdirSync(`${path}/${folder}`).filter(file => file.endsWith('.js'));
+        console.log(c.fg.yellow + c.bright + '\n[Console] > Bot is Starting...' + c.reset);
+        const { commands, commandArray } = client;
+
+        for (const folder of commandFolders) {
+            const commandFiles = fs.readdirSync(`./src/commands/${folder}`).filter(file => file.endsWith('.js'));
+
+            console.log(`\n => ${folder.split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ")} - Commands`);
+            if (commandFiles.length < 1) {
+                console.log(c.fg.yellow + 'No Commands Found' + c.reset);
+            };
+
             for (const file of commandFiles) {
                 const command = require(`../commands/${folder}/${file}`);
-                client.commands.set(command.data.name, command);
-                client.commandArray.push(command.data.toJSON());
+
+                commands.set(command.data.name, command);
+                commandArray.push(command.data.toJSON());
+
+                console.log(`[Command] > ` + c.fg.yellow + c.bright + command.data.name + c.reset + ` has successfully passed through the Command Handler.`);
             };
         };
 
@@ -20,15 +31,15 @@ module.exports = (client) => {
 
         (async () => {
             try {
-                console.log('Started refreshing application (/) commands.');
+                console.log(c.fg.yellow + c.bright + '[Bot] > Refreshing Application Commands...' + c.reset);
 
                 await rest.put(
-                    Routes.applicationGuildCommands(clientID, guildID), {
+                    Routes.applicationGuildCommands(process.env.clientID, process.env.guildID), {
                         body: client.commandArray
                     }
                 );
 
-                console.log('Successfully reloaded application (/) commands.');
+                console.log(c.fg.yellow + c.bright + '[Bot] > Successfully Reloaded Application Commands.' + c.reset);
             } catch (error) {
                 console.error(error);
             };

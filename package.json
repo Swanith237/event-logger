@@ -20,7 +20,8 @@
   "dependencies": {
     "discord-api-types": "^0.37.50",
     "discord.js": "^14.11.0",
-    "dotenv": "^16.3.1"
+    "dotenv": "^16.3.1",
+    "easy-json-database": "^1.5.1"
   },
   "bugs": {
     "url": "https://github.com/Swanith237/event-logger/issues"
